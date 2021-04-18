@@ -6,27 +6,22 @@ import Pagination from '../components/pagination'
 import Sidebar from '../components/sidebar'
 import Layout from '../components/layout'
 import Menu from '../data-dummy/menu.json'
-import Post from '../data-dummy/post.json'
 
-export default function Home({ menu, post }) {
+export default function Login({props}) {
   return (
  
-<Layout LayoutProps = {menu} >
-  <Jumbotron />
+<Layout LayoutProps = {props.menu} >
+
 
   <div className="row">
     <div className="col-md-8">
       <h3 className="pb-4 mb-4 fst-italic border-bottom">
-        From the Firehose
+        Login Page
       </h3>
-      {
-        post.map(p => (
-          <Article key = {p.id} post ={p} />
-        ))
-      }
-     
 
-     <Pagination />
+    
+
+   
     </div>
 
     <Sidebar />
@@ -34,13 +29,10 @@ export default function Home({ menu, post }) {
 </Layout>
       )
 }
-export async function getStaticProps() {
-  const req = await fetch('http://localhost:3000/api/hello')
-  const res = await req.json()
-return{
-  props : {
-    menu : res,
-    post : Post
+Login.getInitialProps = () => {
+  return{
+    props : {
+      menu : Menu,
+    }
   }
-}
-}
+  }
